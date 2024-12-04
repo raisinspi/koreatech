@@ -8,6 +8,7 @@ char name[300][300][17];
 int players[300];
 int room = 0;
 
+int i, j, k;
 
 void new_room(int l, char n[17]) {
     lvl[room][0] = l;
@@ -18,8 +19,6 @@ void new_room(int l, char n[17]) {
 
 
 void new_player(int l, char n[17], int m) {
-    int i;
-    
     for(i = 0; i < room; i++) {
         if(players[i] < m && abs(lvl[i][0] - l) <= 10) {
             lvl[i][players[i]] = l;
@@ -33,7 +32,6 @@ void new_player(int l, char n[17], int m) {
 
 
 void salt_and_pepper(int i) {
-    int j, k;
     printf(players[i] == players[0] ? "Started!\n" : "Waiting!\n");
     
     //bubble
