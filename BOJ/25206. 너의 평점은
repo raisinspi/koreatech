@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+    char a[50], c[3];
+    double b;
+    double total=0.0, asdf=0.0;
+    
+    for(int i=0; i<20; i++) {
+        scanf("%s %lf %s", a, &b, c);
+        
+        if(!strcmp(c, "A+")) {
+            asdf += b*4.5;
+        }
+        else if(!strcmp(c, "A0")) {
+            asdf += b*4.0;
+        }
+        else if(!strcmp(c, "B+")) {
+            asdf += b*3.5;
+        }
+        else if(!strcmp(c, "B0")) {
+            asdf += b*3.0;
+        }
+        else if(!strcmp(c, "C+")) {
+            asdf += b*2.5;
+        }
+        else if(!strcmp(c, "C0")) {
+            asdf += b*2.0;
+        }
+        else if(!strcmp(c, "D+")) {
+            asdf += b*1.5;
+        }
+        else if(!strcmp(c, "D0")) {
+            asdf += b*1.0;
+        }
+        else if(!strcmp(c, "F")) {
+            asdf += b*0.0;
+        }
+           
+        if(strcmp(c, "P")) {
+            total += b;
+        }
+    }
+    printf("%.6f", asdf/total);
+    
+    return 0;
+}
