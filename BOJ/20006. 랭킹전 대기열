@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+char name[300][300][17];
+int lvl[300][300];
+int players[300];
+int room = 0;
+
+int i, j, k;
+
+int main(void) {
+    int p, max;
+    scanf("%d %d", &p, &max);
+    
+    for(i=0; i<p; i++) {
+        int l; char n[17];
+        scanf("%d %s", &l, n);
+        
+        for(j=0; j<room; j++) {
+            if(players[j] < max && abs(lvl[j][0] - l) <= 10) {
+                lvl[j][players[j]] = l;
+                strcpy(name[j][players[j]], n);
+                players[j]++;
+                break;
+            }
+        }
+        if(j==room) {
+            lvl[room][0] = l;
+            strcpy(name[room][0], n);
+            players[room] = 1;
+            room++;
+        }
+    }
+    
+    for(i=0; i<room; i++) {
+        printf(players[i] == max ? "Started!\n" : "Waiting!\n");
+        
+        for(j=0; j<players[i]; j++) {
+            for(k=j+1; k<players[i]; k++) {
+                if(strcmp(name[i][j], name[i][k]) > 0) {
+                    int t;
+                    t = lvl[i][j];
+                    lvl[i][j] = lvl[i][k];
+                    lvl[i][k] = t;
+                    char tt[17];
+                    strcpy(tt, name[i][j]);
+                    strcpy(name[i][j], name[i][k]);
+                    strcpy(name[i][k], tt);
+                }
+            }
+            printf("%d %s\n", lvl[i][j], name[i][j]);
+        }
+    }
+    
+    
+    return 0;
+}
